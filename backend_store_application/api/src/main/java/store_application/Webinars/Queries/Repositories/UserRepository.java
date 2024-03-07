@@ -1,6 +1,7 @@
 package store_application.Webinars.Queries.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import store_application.Entities.User;
 
 

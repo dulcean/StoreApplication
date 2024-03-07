@@ -3,13 +3,16 @@ package External.Presentation.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import store_application.Entities.User;
 import store_application.Webinars.Queries.Repositories.UserRepository;
 
 
+
 @RestController
+@RequestMapping(path = "/api")
 public class UserController {
 
     @Autowired

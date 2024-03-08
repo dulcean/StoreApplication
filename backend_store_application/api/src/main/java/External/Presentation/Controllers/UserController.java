@@ -1,42 +1,44 @@
 package External.Presentation.Controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import store_application.Entities.User;
-import store_application.Webinars.Queries.Repositories.UserRepository;
+import store_application.Entities.UserEntity;
+import store_application.Model.User;
+import store_application.Services.UserService;
+
 
 
 @RestController
-@RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    UserService userService;
 
-    @PostMapping("/signup")
-    public User Register(@RequestBody User user) {
-        return userRepository.save(user);
+    @RequestMapping(value = "getallusers", method = RequestMethod.GET)
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
-    /*@PostMapping("/login")
-    public User Login(@RequestBody User user) {
-        User oldUser = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
-        return oldUser;
-    }*/
-
-    @PostMapping("/add")
-    public String postMethodName(@RequestParam String email,
-    @RequestParam String password) {
-       User user = new User();
-       user.setEmail(email);
-       user.setPassword(password);
-       userRepository.save(user);
-       return "SAVED";
+    @RequestMapping(value = "adduser", method = RequestMethod.POST)
+    public String addUser(@RequestBody UserEntity user) {
+        return userService.addUser(user);
     }
-    
+
+    @RequestMapping(value = "updateuser", method = RequestMethod.PUT)
+    public String updateUser(@RequestBody UserEntity user) {
+        return userService.updateUser(user);
+    }
+
+    @RequestMapping(value = "deleteuser", method = RequestMethod.DELETE)
+    public String removeUser(@RequestBody UserEntity user) {
+        return userService.removeUser(user);
+    }
 }

@@ -1,4 +1,4 @@
-package store_application.Entities;
+package store_application.api.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +20,6 @@ public class UserEntity {
     Integer id;
 
     String email;
-    
+
     String password;
 }

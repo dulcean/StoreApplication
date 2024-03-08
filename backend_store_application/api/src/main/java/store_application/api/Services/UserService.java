@@ -1,4 +1,4 @@
-package store_application.Services;
+package store_application.api.Services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import store_application.Entities.UserEntity;
-import store_application.Model.User;
-import store_application.Webinars.Queries.Repositories.UserRepository;
+import store_application.api.Entities.UserEntity;
+import store_application.api.Model.User;
+import store_application.api.Repositories.UserRepository;
 
 @Service
 public class UserService {
@@ -33,7 +33,7 @@ public class UserService {
 
     public String addUser(UserEntity user) {
         try {
-            if (userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
+            if (!userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
                 userRepository.save(user);
                 return "Saved successfully";
             } else {

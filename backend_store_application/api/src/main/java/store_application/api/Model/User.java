@@ -1,4 +1,4 @@
-package store_application.Model;
+package store_application.api.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

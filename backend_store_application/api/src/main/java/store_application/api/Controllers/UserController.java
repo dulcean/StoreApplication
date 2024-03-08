@@ -1,43 +1,45 @@
-package External.Presentation.Controllers;
+package store_application.api.Controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import store_application.Entities.UserEntity;
-import store_application.Model.User;
-import store_application.Services.UserService;
+import store_application.api.Entities.UserEntity;
+import store_application.api.Model.User;
+import store_application.api.Services.UserService;
 
 
 
+@Component
 @RestController
-@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "getallusers", method = RequestMethod.GET)
+    @GetMapping("/GetUsers")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(value = "adduser", method = RequestMethod.POST)
+    @PostMapping("/AddUser")
     public String addUser(@RequestBody UserEntity user) {
         return userService.addUser(user);
     }
 
-    @RequestMapping(value = "updateuser", method = RequestMethod.PUT)
+    @PutMapping("/UpdateUser")
     public String updateUser(@RequestBody UserEntity user) {
         return userService.updateUser(user);
     }
 
-    @RequestMapping(value = "deleteuser", method = RequestMethod.DELETE)
+    @DeleteMapping("/DeleteUser")
     public String removeUser(@RequestBody UserEntity user) {
         return userService.removeUser(user);
     }

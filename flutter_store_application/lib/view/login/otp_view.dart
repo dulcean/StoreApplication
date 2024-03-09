@@ -47,10 +47,10 @@ class _OTPViewState extends State<OTPView> {
               ),
                 children: const [
                   TextSpan(
-                  text: "Please check your mobile number ",
+                  text: "Please check your gmail ",
                 ),
                   TextSpan(
-                  text: "+375********xx ",
+                  text: "zxc ",
                   style: TextStyle(
                   color: Colors.red,
                   fontWeight: FontWeight.w700,
@@ -114,6 +114,7 @@ class _OTPViewState extends State<OTPView> {
               ),
 
                 RoundButton(title: "Next", onPressed: () {
+                  
                   FocusScope.of(context).requestFocus(FocusNode());
                   /*Navigator.push(
                   context,

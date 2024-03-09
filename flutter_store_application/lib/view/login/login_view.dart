@@ -16,11 +16,10 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  UserDTO userDto = UserDTO("", "");
+  UserDTO userDto = UserDTO("", "", "", "");
   late TextEditingController txtEmail;
   late TextEditingController txtPassword;
-  var url = Uri(
-  ); //"http://localhost:8080/AddUser";
+
 
   _LoginViewState() {
     txtEmail = TextEditingController(text: userDto.email);
@@ -113,7 +112,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 const SizedBox(height: 25,),
                 RoundButton(title: "Login", onPressed: () {
-                  save();
+                  
                 }),
 
                 const SizedBox(height: 5,),

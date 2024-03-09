@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import store_application.api.Entities.UserEntity;
 import store_application.api.Model.User;
 import store_application.api.Repositories.UserRepository;
+import store_application.api.Services.Utils.PasswordHashUtil;
 
 @Service
 public class UserService {
@@ -34,10 +35,14 @@ public class UserService {
     public String addUser(UserEntity user) {
         try {
             if (!userRepository.existsByEmailAndPassword(user.getEmail(), user.getPassword())) {
+                String originalPassword = user.getPassword();
+                PasswordHashUtil passwordHashUtil = new PasswordHashUtil();
+                String hashedPassword = passwordHashUtil.md5(originalPassword);
+                user.setPassword(hashedPassword);
                 userRepository.save(user);
                 return "Saved successfully";
             } else {
-                return "This user is already SignUped";
+                return "This user with" + user.getEmail() + "is already SignUped";
             }
         } catch (Exception e) {
             throw e;

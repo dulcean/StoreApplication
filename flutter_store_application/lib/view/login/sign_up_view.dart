@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_application/common/color_extension.dart';
 import 'package:flutter_store_application/common_widgets/round_button.dart';
 import 'package:flutter_store_application/common_widgets/round_textfield.dart';
+import 'package:flutter_store_application/dto/user_dto.dart';
 import 'package:flutter_store_application/view/login/login_view.dart';
 import 'package:flutter_store_application/view/login/otp_view.dart';
 
@@ -13,12 +15,52 @@ class SignUpView extends StatefulWidget {
 }
 
 class _SignUpViewState extends State<SignUpView> {
-  TextEditingController txtName = TextEditingController();
-  TextEditingController txtMobile = TextEditingController();
-  TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
-  TextEditingController txtConfirmPassword = TextEditingController();
+  UserDTO userDto = UserDTO("", "", "", "");
+  late TextEditingController txtName;
+  late TextEditingController txtMobile;
+  late TextEditingController txtEmail;
+  late TextEditingController txtPassword;
+  late TextEditingController txtConfirmPassword = TextEditingController();
+
+
+  _SignUpViewState() {
+    txtEmail = TextEditingController(text: userDto.email);
+    txtPassword = TextEditingController(text: userDto.password);
+    txtName = TextEditingController(text: userDto.name);
+    txtMobile = TextEditingController(text: userDto.phone);
+
+    txtEmail.addListener(() {
+      userDto.email = txtEmail.text;
+    });
+
+    txtPassword.addListener(() {
+      userDto.password = txtPassword.text;
+    });
+
+    txtName.addListener(() {
+      userDto.name = txtName.text;
+    });
+
+    txtMobile.addListener(() {
+      userDto.phone = txtMobile.text;
+    });
+  }
+
   
+
+  Future save() async {
+    final connection = Dio();
+    final response = await connection.post('http://10.0.2.2:8080/AddUser',
+     data: {
+        'email' : userDto.email,
+        'password' : userDto.password,
+        'mobile' : userDto.phone,
+        'name' : userDto.name
+      },
+    );
+    print(response.data);
+  }
+
 
   @override
   Widget build (BuildContext context) {
@@ -109,6 +151,7 @@ class _SignUpViewState extends State<SignUpView> {
 
                 const SizedBox(height: 25,),
                 RoundButton(title: "Sign Up", onPressed: () {
+                  save();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const OTPView()), 

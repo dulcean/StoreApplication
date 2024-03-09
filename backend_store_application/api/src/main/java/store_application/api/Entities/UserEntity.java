@@ -22,4 +22,8 @@ public class UserEntity {
     String email;
 
     String password;
+
+    String name;
+
+    String mobile;
 }

@@ -1,8 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_store_application/common/color_extension.dart';
 import 'package:flutter_store_application/common_widgets/round_button.dart';
 import 'package:flutter_store_application/common_widgets/round_icon_button.dart';
 import 'package:flutter_store_application/common_widgets/round_textfield.dart';
+import 'package:flutter_store_application/dto/user_dto.dart';
 import 'package:flutter_store_application/view/login/reset_password_view.dart';
 import 'package:flutter_store_application/view/login/sign_up_view.dart';
 
@@ -14,9 +16,37 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  UserDTO userDto = UserDTO("", "");
+  late TextEditingController txtEmail;
+  late TextEditingController txtPassword;
+  var url = Uri(
+  ); //"http://localhost:8080/AddUser";
 
-  TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
+  _LoginViewState() {
+    txtEmail = TextEditingController(text: userDto.email);
+    txtPassword = TextEditingController(text: userDto.password);
+
+    txtEmail.addListener(() {
+      userDto.email = txtEmail.text;
+    });
+
+    txtPassword.addListener(() {
+      userDto.password = txtPassword.text;
+    });
+  }
+
+  
+
+  Future save() async {
+    final connection = Dio();
+    final response = await connection.post('http://10.0.2.2:8080/AddUser',
+     data: {
+        'email' : userDto.email,
+        'password' : userDto.password
+      },
+    );
+    print(response.data);
+  }
 
   @override
   Widget build (BuildContext context) {
@@ -82,7 +112,9 @@ class _LoginViewState extends State<LoginView> {
                   obscureText: true,
                 ),
                 const SizedBox(height: 25,),
-                RoundButton(title: "Login", onPressed: () {}),
+                RoundButton(title: "Login", onPressed: () {
+                  save();
+                }),
 
                 const SizedBox(height: 5,),
 

@@ -28,7 +28,7 @@ class _OTPViewState extends State<OTPView> {
               
           
               Text(
-                "We have sent an OTP to your Mobile",
+                "We have sent an OTP to your Email",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: TColor.primaryText,
                  fontSize: 30 ,
@@ -69,10 +69,10 @@ class _OTPViewState extends State<OTPView> {
 
         
                 const SizedBox(
-                height: 60,
+                height: 40,
               ),
 
-              SizedBox(height: 60, child: OtpPinField(
+              SizedBox(height: 90, child: OtpPinField(
                     key: _otpPinFieldController,
                     autoFillEnable: true,
                     textInputAction: TextInputAction.done,
@@ -85,7 +85,7 @@ class _OTPViewState extends State<OTPView> {
                       
                     },
 
-                    fieldWidth: 40,
+                    fieldWidth: 60,
                     otpPinFieldStyle: OtpPinFieldStyle(
                         defaultFieldBorderColor: Colors.transparent,
                         activeFieldBorderColor: Colors.transparent,
@@ -97,7 +97,7 @@ class _OTPViewState extends State<OTPView> {
                    cursorColor: TColor.placeholder,
                     upperChild: const Column(
                       children: [
-                        SizedBox(height: 30),
+                        SizedBox(height: 50),
                         Icon(Icons.flutter_dash_outlined, size: 150),
                         SizedBox(height: 20),
                       ],
@@ -110,7 +110,7 @@ class _OTPViewState extends State<OTPView> {
 
               
               const SizedBox(
-                height: 60,
+                height: 40,
               ),
 
                 RoundButton(title: "Next", onPressed: () {

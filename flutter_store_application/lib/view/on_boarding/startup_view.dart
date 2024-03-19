@@ -40,12 +40,12 @@ class _StartupViewState extends State<StartupView> {
                 fit: BoxFit.cover,
               ),
 
-              Image.asset(
+              /*Image.asset(
                 "assets/img/app_logo.png",
                 width: media.width * 0.7,
                 height: media.width * 0.7,
                 fit: BoxFit.cover,
-              ),
+              ),*/
 
         ],
       ),

@@ -23,7 +23,6 @@ class _SignUpViewState extends State<SignUpView> {
   late TextEditingController txtPassword;
   late TextEditingController txtConfirmPassword = TextEditingController();
 
-
   _SignUpViewState() {
     txtEmail = TextEditingController(text: userDto.email);
     txtPassword = TextEditingController(text: userDto.password);
@@ -60,8 +59,6 @@ class _SignUpViewState extends State<SignUpView> {
     );
     print(response.data);
   }
-
-  
 
   @override
   Widget build(BuildContext context) {

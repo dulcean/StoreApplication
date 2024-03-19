@@ -7,7 +7,6 @@ class RoundIconButton extends StatelessWidget {
   final String icon;
   final Color color;
 
-
   const RoundIconButton({
     super.key,
     required this.title,
@@ -19,35 +18,34 @@ class RoundIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-    onTap: onPressed,
-    child : Container(
-              height: 56,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular
-              (28), ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    icon,
-                    width: 20,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: TColor.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600
-                    ),
-                  ),
-                ],
-              ),
+      onTap: onPressed,
+      child: Container(
+        height: 56,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(28),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              icon,
+              width: 20,
             ),
+            const SizedBox(
+              width: 8,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                  color: TColor.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

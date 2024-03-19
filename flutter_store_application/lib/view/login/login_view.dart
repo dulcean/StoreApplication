@@ -7,9 +7,10 @@ import 'package:flutter_store_application/common_widgets/round_textfield.dart';
 import 'package:flutter_store_application/dto/user_dto.dart';
 import 'package:flutter_store_application/view/login/reset_password_view.dart';
 import 'package:flutter_store_application/view/login/sign_up_view.dart';
+import 'package:flutter_store_application/view/main_tableview/main_tableview.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView ({super.key});
+  const LoginView({super.key});
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -19,7 +20,6 @@ class _LoginViewState extends State<LoginView> {
   UserDTO userDto = UserDTO("", "", "", "");
   late TextEditingController txtEmail;
   late TextEditingController txtPassword;
-
 
   _LoginViewState() {
     txtEmail = TextEditingController(text: userDto.email);
@@ -34,21 +34,17 @@ class _LoginViewState extends State<LoginView> {
     });
   }
 
-  
-
   Future save() async {
     final connection = Dio();
-    final response = await connection.post('http://10.0.2.2:8080/AddUser',
-     data: {
-        'email' : userDto.email,
-        'password' : userDto.password
-      },
+    final response = await connection.post(
+      'http://10.0.2.2:8080/AddUser',
+      data: {'email': userDto.email, 'password': userDto.password},
     );
     print(response.data);
   }
 
   @override
-  Widget build (BuildContext context) {
+  Widget build(BuildContext context) {
     //var media = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -58,17 +54,17 @@ class _LoginViewState extends State<LoginView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              
-              const SizedBox(height: 64,),
-          
+              const SizedBox(
+                height: 64,
+              ),
               Text(
                 "Login",
-                style: TextStyle(color: TColor.primaryText,
-                 fontSize: 30 ,
-                 fontWeight: FontWeight.w800
-                 ),
-                ),
-          
+                style: TextStyle(
+                    color: TColor.primaryText,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w800),
+              ),
+
               /*RichText(
                text: TextSpan(
               style: TextStyle(
@@ -94,110 +90,116 @@ class _LoginViewState extends State<LoginView> {
            ),
           ),*/
 
-          
-                const SizedBox(height: 25,),
-
-                RoundTextfield(
-                  hintText: "Your Email",
-                  controller: txtEmail,
-                  keyboardType: TextInputType.emailAddress,
-                ),
-          
-                const SizedBox(height: 20,),
-
-                RoundTextfield(
-                  hintText: "Password",
-                  controller: txtPassword,
-                  obscureText: true,
-                ),
-                const SizedBox(height: 25,),
-                RoundButton(title: "Login", onPressed: () {
-                  
-                }),
-
-                const SizedBox(height: 5,),
-
-                TextButton(onPressed: () {
+              const SizedBox(
+                height: 25,
+              ),
+              RoundTextfield(
+                hintText: "Your Email",
+                controller: txtEmail,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              RoundTextfield(
+                hintText: "Password",
+                controller: txtPassword,
+                obscureText: true,
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              RoundButton(
+                  title: "Login",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MainTabView(),
+                      ),
+                    );
+                  }),
+              const SizedBox(
+                height: 5,
+              ),
+              TextButton(
+                onPressed: () {
                   Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ResetPasswordView(),
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ResetPasswordView(),
                     ),
                   );
-                }, child: Text(
-                "Forgot your password?",
-                style: TextStyle(color: TColor.secondaryText,
-                 fontSize: 14 ,
-                 fontWeight: FontWeight.w500
-                 ),
+                },
+                child: Text(
+                  "Forgot your password?",
+                  style: TextStyle(
+                      color: TColor.secondaryText,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500),
                 ),
-                ),
-
-                const SizedBox(height: 20,),
-
-                Text(
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
                 "or Login with",
-                style: TextStyle(color: TColor.secondaryText,
-                 fontSize: 14 ,
-                 fontWeight: FontWeight.w500
-                 ),
-                ),
-
-              const SizedBox(height: 20,),
-
-                RoundIconButton(
+                style: TextStyle(
+                    color: TColor.secondaryText,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              RoundIconButton(
                   title: "Login with VK",
                   icon: "assets/img/vk_logo.png",
                   color: const Color(0xff367Fc0),
-                  onPressed: (){ }
-                ),
-
-              const SizedBox(height: 20,),
-
-                RoundIconButton(
+                  onPressed: () {}),
+              const SizedBox(
+                height: 20,
+              ),
+              RoundIconButton(
                   title: "Login with Google",
                   icon: "assets/img/google_logo.png",
                   color: const Color.fromARGB(255, 192, 54, 54),
-                  onPressed: (){ }
-                ),
-               
-              const SizedBox(height: 30,),
-
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignUpView(),
-                    ),
-                );
-
-              },
-               child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Don't have an account? ",
-                    style: TextStyle(
-                      color: TColor.secondaryText,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-
-                  Text(
-                    "Sign Up!",
-                    style: TextStyle(
-                      color: TColor.primary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700, 
-                    ),
-                  )
-                ],
-               )
+                  onPressed: () {}),
+              const SizedBox(
+                height: 30,
               ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpView(),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Don't have an account? ",
+                        style: TextStyle(
+                          color: TColor.secondaryText,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        "Sign Up!",
+                        style: TextStyle(
+                          color: TColor.primary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      )
+                    ],
+                  )),
             ],
-           ),
+          ),
         ),
       ),
     );

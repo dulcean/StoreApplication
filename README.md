@@ -14,7 +14,7 @@
 5. **Безопасные платежи:** Спокойно совершайте транзакции, зная, что они надежно защищены. Поддерживаем различные методы оплаты для вашего удобства.
 
 ## Используемый инструментарий
-Java SpringWeb, Flutter + dart, Kafka, GradleBuildTools, PostgreSql, Hibernate
+Java SpringWeb, Flutter + dart, Kafka, GradleBuildTools, H2, Hibernate
 
 ## Интерфейс 
 
